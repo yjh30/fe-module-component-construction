@@ -35,7 +35,9 @@ npm i -D ghooks lint-staged
 }
 ```
 
-#### 2、cz-cli 支持Angular的Commit message格式
+#### 2、commit提交流 支持Angular的Commit message格式
+> [Angular规范](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)
+
 安装方式1:
 ```bash
 npm i -g commitizen
@@ -46,7 +48,7 @@ commitizen init cz-conventional-changelog --save --save-exact
 npm i -D cz-conventional-changelog
 ```
 ```js
-// package.json
+// 手动配置 package.json
 "config": {
   "commitizen": {
     "path": "./node_modules/cz-conventional-changelog"
@@ -67,8 +69,25 @@ npm i -D validate-commit-msg
 }
 ```
 
-#### 4、package.json完整配置
+#### 4、生成changelog
+安装conventional-changelog-cli
+```bash
+npm i -D conventional-changelog-cli
+```
+不重写之前的previous changelog
+```bash
+node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s
+```
+重写之前的previous changelog
+```bash
+node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+```
+
+#### 5、package.json完整配置
 ```js
+"scripts": {
+  "changelog": "node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+},
 "config": {
   "commitizen": {
     "path": "./node_modules/cz-conventional-changelog"
